@@ -8,7 +8,7 @@ public class ActiveMqRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-       from("rest:get:amq/getAllData")
+       from("direct:pushdataintoqueue")
                 .setBody(simple("{{sql.getAllData}}"))
                 .log("Before calling database, Request : ${body}")
                 .toD("sql:${body}") 
@@ -16,8 +16,7 @@ public class ActiveMqRoute extends RouteBuilder {
                 .setExchangePattern(ExchangePattern.InOnly)
                 .to("activemq:queue:amq-users")
                 .end()
-                .bean("utils", "pushIntoQueueSuccessMSG")
-                .marshal().json(JsonLibrary.Jackson);
+                .bean("utils", "pushIntoQueueSuccessMSG");
     }
 
 }

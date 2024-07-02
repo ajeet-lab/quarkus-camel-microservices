@@ -15,7 +15,7 @@ public class CreateCsvWithBindy extends RouteBuilder {
     public void configure() throws Exception {
         BindyCsvDataFormat bindy = new BindyCsvDataFormat(Employee.class);
         bindy.setLocale("en");
-        from("rest:get:bindy/getAllData")
+        from("direct:createcsvwithbindy")
                 .setBody(simple("{{sql.getAllData}}"))
                 .toD("sql:${body}")
                 .log("Get data by id >>> ${body.size()}") // Log retrieved data         
@@ -31,7 +31,6 @@ public class CreateCsvWithBindy extends RouteBuilder {
                         Employee employee = new Employee(id, name, position, salary);
                         employees.add(employee);
                     }
-
                     exchange.getIn().setBody(employees);
                 })
                 
@@ -39,8 +38,7 @@ public class CreateCsvWithBindy extends RouteBuilder {
                 // Write to CSV file with append mode
                 .toD("file:work/output?fileName=CreateCsvWithBindy.csv")
                 // Invoke a bean method after successful write
-                .bean("utils", "csvCreatedSuccessMSG")
-                .marshal().json(JsonLibrary.Jackson);
+                .bean("utils", "csvCreatedSuccessMSG");
     }
 
 }

@@ -22,14 +22,13 @@ public class CreateCsvWithCsv extends RouteBuilder {
         csvFormat.setDelimiter(",");
         csvFormat.setHeader(headers); // Enable maps format for CSV
 
-        from("rest:get:csv/getAllData")
+        from("direct:createcsvwithcsv")
                 .setBody(simple("{{sql.getAllData}}"))
-                .toD("sql:${body}")
-                .log("Get data by id >>> ${body.size()}")
+                .toD("sql:${body}")         
+                .log("Get data by id >>> TotalSize : ${body.size()}  >>>>>> and body: ${body}")
                 .marshal(csvFormat)
                 .to("file:work/output?fileName=CreateCsvWithCsv.csv&fileExist=Override")
-                .bean("utils", "csvCreatedSuccessMSG")
-                .marshal().json(JsonLibrary.Jackson);
+                .bean("utils", "csvCreatedSuccessMSG");
     }
 
 }

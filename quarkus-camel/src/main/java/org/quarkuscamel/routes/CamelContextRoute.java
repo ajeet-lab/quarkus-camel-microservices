@@ -18,12 +18,25 @@ public class CamelContextRoute extends RouteBuilder {
         // Set up the ActiveMQ connection factory
         restConfiguration().component("netty-http").host("localhost").port(8081).bindingMode(RestBindingMode.auto);
 
-        rest("/api/v1").get("/getAllData").to("direct:getAllData");
-        rest("/api/v1").post("/create").to("direct:create");
-        rest("/api/v1").get("/getById/{id}").to("direct:getById");
-        rest("/api/v1").put("/updateById/{id}").to("direct:updateById");
-        rest("/api/v1").delete("/deleteById/{id}").to("direct:deleteById");
 
+        // START CRUD OPERATION ROUTE
+        rest("/api/v1").get("/users").routeId("getAllUserRoute").to("direct:getAllData");
+        rest("/api/v1").post("/users").routeId("createUserRoute").to("direct:create");
+        rest("/api/v1").get("/users/{id}").routeId("getUserByIdRoute").to("direct:getById");
+        rest("/api/v1").put("/users/{id}").routeId("updateUserByIdRoute").to("direct:updateById");
+        rest("/api/v1").delete("/users/{id}").routeId("deleteUserByIdRoute").to("direct:deleteById");
+        // END CRUD OPERATION ROUTE
+
+
+        // START CREATE CSV ROUTE
+        rest("/api/v1").get("/csv/createcsv").routeId("createCsvFileWithCsvRoute").to("direct:createcsvwithcsv"); // Create CSV using camel-qaurkus-csv dependency
+        rest("/api/v1").get("/csv/createbindy").routeId("createCsvFileWithBindyRoute").to("direct:createcsvwithbindy"); // Create CSV using camel-qaurkus-bindy dependency
+        // END CREATE CSV ROUTE
+
+
+        // START ACTIVE MQ ROUTE
+            rest("/api/v1").get("/amq/pushdataintoqueue").routeId("pushDataIntoQueueRoute").to("direct:pushdataintoqueue"); // Push data into amq queue using camel-qaurkus-activemq and pooled-jms dependency
+        // END ACTIVE MQ ROUTE
     }
 
 }
