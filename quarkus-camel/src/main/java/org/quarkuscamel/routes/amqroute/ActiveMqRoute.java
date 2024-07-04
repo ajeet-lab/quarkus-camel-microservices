@@ -2,7 +2,6 @@ package org.quarkuscamel.routes.amqroute;
 
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.model.dataformat.JsonLibrary;
 
 public class ActiveMqRoute extends RouteBuilder {
 
@@ -16,7 +15,8 @@ public class ActiveMqRoute extends RouteBuilder {
                 .setExchangePattern(ExchangePattern.InOnly)
                 .to("activemq:queue:amq-users")
                 .end()
-                .bean("utils", "pushIntoQueueSuccessMSG");
+                .setHeader("message", simple("PUSHEDINTOQUEUE"))
+                .bean("utils", "csvJsonAmqMessage");
     }
 
 }

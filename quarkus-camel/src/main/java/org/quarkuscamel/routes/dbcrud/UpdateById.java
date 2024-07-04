@@ -14,7 +14,7 @@ public class UpdateById extends RouteBuilder {
                 .toD("sql:${body}")
                 .log("headers >>>>>>>>>>>>> ${in.headers}")
                 .setHeader("message", simple("UPDATED"))
-                .bean("utils", "message");;
+                .bean("utils", "message");
         ;
     }
 

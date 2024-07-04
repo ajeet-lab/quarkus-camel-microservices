@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.model.dataformat.CsvDataFormat;
-import org.apache.camel.model.dataformat.JsonLibrary;
+import org.apache.camel.dataformat.csv.CsvDataFormat;
 
 public class CreateCsvWithCsv extends RouteBuilder {
 
@@ -19,8 +18,8 @@ public class CreateCsvWithCsv extends RouteBuilder {
         headers.add("Salary");
 
         CsvDataFormat csvFormat = new CsvDataFormat();
-        csvFormat.setDelimiter(",");
-        csvFormat.setHeader(headers); // Enable maps format for CSV
+        csvFormat.setDelimiter(',');
+        csvFormat.setHeader(new String[]{"id", "name", "position", "salary"}); // Enable maps format for CSV
 
         from("direct:createcsvwithcsv")
                 .setBody(simple("{{sql.getAllData}}"))
@@ -28,7 +27,8 @@ public class CreateCsvWithCsv extends RouteBuilder {
                 .log("Get data by id >>> TotalSize : ${body.size()}  >>>>>> and body: ${body}")
                 .marshal(csvFormat)
                 .to("file:work/output?fileName=CreateCsvWithCsv.csv&fileExist=Override")
-                .bean("utils", "csvCreatedSuccessMSG");
+                .setHeader("message", simple("CSV_CREATED"))
+                .bean("utils", "csvJsonAmqMessage");
     }
 
 }

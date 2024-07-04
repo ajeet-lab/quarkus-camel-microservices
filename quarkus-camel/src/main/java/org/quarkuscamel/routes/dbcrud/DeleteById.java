@@ -11,7 +11,7 @@ public class DeleteById extends RouteBuilder {
                 .toD("sql:${body}")
                 .setBody(simple("Data deleted succefully !!"))
                 .setHeader("message", simple("DELETED"))
-                .bean("utils", "message");;
+                .bean("utils", "message");
     }
 
 }

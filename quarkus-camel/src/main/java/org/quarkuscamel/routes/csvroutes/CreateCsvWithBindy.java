@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat;
-import org.apache.camel.model.dataformat.JsonLibrary;
 import org.quarkuscamel.entities.Employee;
 
 public class CreateCsvWithBindy extends RouteBuilder {
@@ -37,8 +36,8 @@ public class CreateCsvWithBindy extends RouteBuilder {
                 .marshal(bindy)
                 // Write to CSV file with append mode
                 .toD("file:work/output?fileName=CreateCsvWithBindy.csv")
-                // Invoke a bean method after successful write
-                .bean("utils", "csvCreatedSuccessMSG");
+                .setHeader("message", simple("CSV_CREATED"))
+                .bean("utils", "csvJsonAmqMessage");
     }
 
 }

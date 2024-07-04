@@ -3,28 +3,26 @@ package org.quarkuscamel.entities;
 import org.apache.camel.dataformat.bindy.annotation.CsvRecord;
 import org.apache.camel.dataformat.bindy.annotation.DataField;
 
-import jakarta.enterprise.context.ApplicationScoped;
 
 
-@CsvRecord(separator = ",", crlf = "UNIX", generateHeaderColumns = true, skipFirstLine = true)
+@CsvRecord(separator = ",", generateHeaderColumns = true, skipFirstLine = true)
 public class Employee {
 
 
-    @DataField(pos = 1, columnName = "ID")
+    @DataField(pos = 1)
     private int id;
 
-    @DataField(pos = 2, columnName = "Name")
+    @DataField(pos = 2)
     private String name;
 
-    @DataField(pos = 3, columnName = "Position")
+    @DataField(pos = 3)
     private String position;
 
-     @DataField(pos = 4, columnName = "Salary")
+     @DataField(pos = 4)
      private long salary;
 
 
-
-    
+    public Employee() {}
 
     public Employee(int id, String name, String position, long salary) {
         this.id = id;
