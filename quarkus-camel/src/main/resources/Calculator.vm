@@ -1,4 +1,0 @@
-<tem:${headers.operationName} xmlns:tem="http://tempuri.org/">
-    <tem:intA>$body.intA</tem:intA>
-    <tem:intB>$body.intB</tem:intB>
-</tem:${headers.operationName}>
