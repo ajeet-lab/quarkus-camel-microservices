@@ -1,0 +1,11 @@
+<html>
+<head></head>
+<body>
+Hello Team,<br/><br/>
+
+Please find the attachment of <b>${headers.CamelFileName}</b>.<br/><br/>
+
+Best regards,<br/>
+Your Company
+</body>
+</html>

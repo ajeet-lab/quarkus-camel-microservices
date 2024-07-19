@@ -1,0 +1,6 @@
+Dear ${body.name},<br/><br/>
+
+<b>${body.message}</b><br/><br/>
+
+Best regards,<br/>
+${body.regardsName}
