@@ -1,4 +1,5 @@
-# quarkus-Camel project overview
+# Project Overview
+## quarkus-Camel 
 1. Database CRUD operations
 2. JSON to CSV conversion
 3. CSV to JSON conversion
@@ -9,3 +10,8 @@
 8. SOAP service :  SOAP integration with Calculator WSDL
 9. Data mapping with Jolt
 10. SalesForce integration
+11. Email Integration (send/read an email, send/read an email with attachment)
+
+
+## ProjectWithFEAndBEAdopter
+Inside the ProjectWithFEAndBEAdopter project, I have created two adopters (ProductFrontendAdopter and ProductBackendAdopter).

@@ -1,3 +1,7 @@
+## TODO
+1. Implement XSLT
+2. Implement Swagger UI
+
 ## Project overview
 1. Database CRUD operations
 2. JSON to CSV conversion
@@ -9,6 +13,7 @@
 8. SOAP service :  SOAP integration with Calculator WSDL
 9. Data mapping with Jolt
 10. SalesForce integration
+11. Email Integration (send/read an email, send/read an email with attachment)
 
 
 ### How to config more properties file in application.properties
